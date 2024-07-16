@@ -1,23 +1,15 @@
-import AuthButton from "@/components/AuthButton";
-import DeployButton from "@/components/DeployButton";
-import Header from "@/components/Header";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
+import { AuthButton } from "@/components/AuthButton";
+import { DeployButton } from "@/components/DeployButton";
+import { Header } from "@/components/Header";
+import { ConnectSupabaseSteps } from "@/components/tutorial/ConnectSupabaseSteps";
+import { SignUpUserSteps } from "@/components/tutorial/SignUpUserSteps";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Index() {
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-
-  const isSupabaseConnected = canInitSupabaseClient();
+  const client = createClient();
+  const {
+    data: { session },
+  } = await client.auth.getSession();
 
   return (
     <div className="flex w-full flex-1 flex-col items-center gap-20">
@@ -25,7 +17,7 @@ export default async function Index() {
         <div className="flex w-full max-w-4xl items-center justify-between p-3 text-sm">
           {/* eslint-disable-next-line react/jsx-no-undef */}
           <DeployButton />
-          {isSupabaseConnected && <AuthButton />}
+          <AuthButton />
         </div>
       </nav>
 
@@ -33,7 +25,7 @@ export default async function Index() {
         <Header />
         <main className="flex flex-1 flex-col gap-6">
           <h2 className="mb-4 text-4xl font-bold">Next steps</h2>
-          {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
+          {session ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
         </main>
       </div>
 
