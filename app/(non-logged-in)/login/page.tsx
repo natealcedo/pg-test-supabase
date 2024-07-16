@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { checkSession, signIn, signUp } from "@/app/actions/auth";
+import { getSession, signIn, signUp } from "@/app/actions/auth";
 
 import { SubmitButton } from "./submit-button";
 
 export default async function Login({ searchParams }: { searchParams: { message: string } }) {
-  const session = await checkSession();
+  const session = await getSession();
   if (session) {
     return redirect("/");
   }

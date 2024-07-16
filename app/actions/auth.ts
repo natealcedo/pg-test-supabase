@@ -32,7 +32,7 @@ export async function signIn(formData: FormData) {
   redirect("/");
 }
 
-export async function checkSession() {
+export async function getSession() {
   const supabase = createClient();
   const {
     data: { session },

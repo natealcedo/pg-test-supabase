@@ -1,21 +1,16 @@
 import Link from "next/link";
 
-import { getUser, signOut } from "@/app/actions/auth";
+import { getSession, signOut } from "@/app/actions/auth";
 
 export async function AuthButton() {
-  const {
-    data: { user },
-  } = await getUser();
+  const session = await getSession();
 
-  return user ? (
-    <div className="flex items-center gap-4">
-      Hey, {user.email}!
-      <form action={signOut}>
-        <button className="bg-btn-background hover:bg-btn-background-hover rounded-md px-4 py-2 no-underline">
-          Logout
-        </button>
-      </form>
-    </div>
+  return session ? (
+    <form action={signOut}>
+      <button className="bg-btn-background hover:bg-btn-background-hover rounded-md px-4 py-2 no-underline">
+        Logout
+      </button>
+    </form>
   ) : (
     <Link
       href="/login"

@@ -1,8 +1,9 @@
+import { getUser } from "@/app/actions/auth";
 import { AuthButton } from "@/components/AuthButton";
-import { DeployButton } from "@/components/DeployButton";
 import { Header } from "@/components/Header";
 import { ConnectSupabaseSteps } from "@/components/tutorial/ConnectSupabaseSteps";
 import { SignUpUserSteps } from "@/components/tutorial/SignUpUserSteps";
+import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Index() {
@@ -10,13 +11,20 @@ export default async function Index() {
   const {
     data: { session },
   } = await client.auth.getSession();
+  const {
+    data: { user },
+  } = await getUser();
 
   return (
     <div className="flex w-full flex-1 flex-col items-center gap-20">
       <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10">
-        <div className="flex w-full max-w-4xl items-center justify-between p-3 text-sm">
-          {/* eslint-disable-next-line react/jsx-no-undef */}
-          <DeployButton />
+        <div
+          className={cn(
+            "flex w-full max-w-4xl items-center p-3 text-sm",
+            user ? "justify-between" : "justify-end"
+          )}
+        >
+          {user && <span>Hey, {user.email}!</span>}
           <AuthButton />
         </div>
       </nav>
