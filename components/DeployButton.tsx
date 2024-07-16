@@ -1,4 +1,4 @@
-export default function DeployButton() {
+export function DeployButton() {
   return (
     <a
       className="hover:bg-btn-background-hover flex rounded-md border px-3 py-2 no-underline"

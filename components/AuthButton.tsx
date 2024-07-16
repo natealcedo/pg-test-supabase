@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 
-export default async function AuthButton() {
+export async function AuthButton() {
   const supabase = createClient();
 
   const {

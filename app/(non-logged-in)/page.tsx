@@ -1,10 +1,9 @@
+import AuthButton from "@/components/AuthButton";
+import DeployButton from "@/components/DeployButton";
 import Header from "@/components/Header";
 import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
 import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
 import { createClient } from "@/utils/supabase/server";
-
-import AuthButton from "../components/AuthButton";
-import DeployButton from "../components/DeployButton";
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
@@ -24,6 +23,7 @@ export default async function Index() {
     <div className="flex w-full flex-1 flex-col items-center gap-20">
       <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10">
         <div className="flex w-full max-w-4xl items-center justify-between p-3 text-sm">
+          {/* eslint-disable-next-line react/jsx-no-undef */}
           <DeployButton />
           {isSupabaseConnected && <AuthButton />}
         </div>
