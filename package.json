@@ -4,7 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint .",
     "gen-types": "supabase gen types --lang=typescript --local --schema public,auth > lib/types.ts && next lint --fix .",
     "migrate": "supabase migration up"
   },
