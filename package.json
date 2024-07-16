@@ -5,7 +5,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen-types": "supabase gen types --lang=typescript --local --schema public,auth > lib/types.ts"
+    "gen-types": "supabase gen types --lang=typescript --local --schema public,auth > lib/types.ts && next lint --fix .",
+    "migrate": "supabase migration up"
   },
   "dependencies": {
     "@supabase/ssr": "latest",
@@ -42,6 +43,7 @@
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
+    "supabase": "^1.183.5",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.5.3"
   }
